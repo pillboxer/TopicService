@@ -25,8 +25,9 @@ public func configure(_ app: Application) async throws {
 	
 	let serverPort = Environment.get("SERVER_PORT").flatMap(Int.init(_:)) ?? 8080
 	app.http.server.configuration.port = serverPort
-
+		
     app.migrations.add(CreateTopicMigration())
+	app.migrations.add(CreateTopicStageMigration())
 
 	try await app.autoMigrate()
     try routes(app)
